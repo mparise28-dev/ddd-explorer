@@ -8,7 +8,9 @@ export type DDDContextValue = {
   error: string | null;
   dddSelecionado: number | null;
   historico: number[];
-  clearData: () => void; // 🆕
+  favoritos: number[]; // 🆕
+  toggleFavorito: (ddd: number) => void; // 🆕
+  clearData: () => void;
 };
 
 export const DDDContext = createContext<DDDContextValue | undefined>(undefined);
