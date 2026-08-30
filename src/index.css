@@ -1,5 +1,5 @@
 /* ===== IMPORTAÇÃO DE FONTES ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
 /* ===== RESET ===== */
 * {
@@ -10,7 +10,11 @@
 
 /* ===== GLOBAL ===== */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
   min-height: 100vh;
   display: flex;
@@ -146,7 +150,9 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ===== OUTPUT ===== */
@@ -462,4 +468,81 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
+}
+
+/* ===== FILTRO ===== */
+.filtro-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.filtro-input {
+  flex: 1;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+.filtro-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.filtro-input:focus {
+  border-color: rgba(245, 87, 108, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.1);
+}
+
+.filtro-limpar {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: all 0.2s;
+  position: absolute;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filtro-limpar:hover {
+  background: rgba(245, 87, 108, 0.2);
+  color: #f5576c;
+  transform: scale(1.1);
+}
+
+.filtro-contagem {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+.filtro-vazio {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+  list-style: none !important;
+}
+
+.filtro-vazio::before {
+  content: "🔍";
+  margin-right: 8px;
 }

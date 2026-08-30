@@ -1,9 +1,11 @@
+import { useState } from "react"; // 🆕 Importar useState
 import useDDD from "../hooks/useDDD";
 import Favoritos from "./Favoritos";
 
 export default function Output() {
-  // 🆕 Pega o proccessRequest aqui no topo
-  const { objeto, loading, error, dddSelecionado, historico, proccessRequest } = useDDD();
+  const [filtro, setFiltro] = useState<string>(""); // 🆕 Estado do filtro
+  const { objeto, loading, error, dddSelecionado, historico, proccessRequest } =
+    useDDD();
 
   // LOADING
   if (loading) {
@@ -47,7 +49,7 @@ export default function Output() {
                   <button
                     key={ddd}
                     className="historico-item"
-                    onClick={() => proccessRequest(ddd)} // ✅ Agora funciona!
+                    onClick={() => proccessRequest(ddd)}
                   >
                     📞 {ddd}
                   </button>
@@ -60,6 +62,11 @@ export default function Output() {
     );
   }
 
+  // 🆕 FILTRAR CIDADES
+  const cidadesFiltradas = objeto.cities.filter((cidade) =>
+    cidade.toLowerCase().includes(filtro.toLowerCase()),
+  );
+
   // COM DADOS
   return (
     <div id="saida">
@@ -68,14 +75,44 @@ export default function Output() {
           <h2 id="titulo">📍 {objeto.state}</h2>
           <Favoritos />
         </div>
-        <span className="badge-contagem">
-          {objeto.cities.length} cidades
-        </span>
+        <span className="badge-contagem">{objeto.cities.length} cidades</span>
       </div>
+
+      {/* 🆕 CAMPO DE FILTRO */}
+      <div className="filtro-container">
+        <input
+          type="text"
+          className="filtro-input"
+          placeholder="🔍 Filtrar cidades..."
+          value={filtro}
+          onChange={(e) => setFiltro(e.target.value)}
+        />
+        {filtro && (
+          <button
+            className="filtro-limpar"
+            onClick={() => setFiltro("")}
+            title="Limpar filtro"
+          >
+            ✕
+          </button>
+        )}
+      </div>
+
+      {/* 🆕 CONTAGEM DO FILTRO */}
+      {filtro && (
+        <p className="filtro-contagem">
+          Mostrando {cidadesFiltradas.length} de {objeto.cities.length} cidades
+        </p>
+      )}
+
       <ol id="lista">
-        {objeto.cities.map((cidade) => (
-          <li key={cidade}>{cidade}</li>
-        ))}
+        {cidadesFiltradas.length > 0 ? (
+          cidadesFiltradas.map((cidade) => <li key={cidade}>{cidade}</li>)
+        ) : (
+          <li className="filtro-vazio">
+            Nenhuma cidade encontrada para "{filtro}"
+          </li>
+        )}
       </ol>
     </div>
   );
