@@ -4,6 +4,12 @@
 
 ---
 
+## 🌐 **Acesse o projeto online**
+
+🔗 **[ddd-explorer.vercel.app](https://ddd-explorer.vercel.app)**
+
+---
+
 ## 🚀 Sobre o Projeto
 
 O **DDD Explorer** é uma aplicação web que consome a **BrasilAPI** para listar todas as cidades pertencentes a um determinado código de Discagem Direta à Distância (DDD). Com uma interface limpa e responsiva, o usuário pode pesquisar qualquer DDD válido e visualizar a lista completa de cidades daquele estado.
@@ -26,8 +32,11 @@ Este projeto foi desenvolvido como parte do aprendizado em **Desenvolvimento Web
 | ⏳ **Loading** | Indicador visual enquanto os dados são carregados |
 | 🧠 **Tratamento de Erros** | Mensagens amigáveis para DDDs inválidos ou erros de rede |
 | 📊 **Contagem** | Exibe o total de cidades encontradas |
+| ⭐ **Favoritos** | Salve seus DDDs favoritos com localStorage |
+| 🔍 **Filtro em tempo real** | Encontre rapidamente uma cidade na lista |
+| 🌙 **Modo escuro/claro** | Alternância de tema com persistência |
 | 📱 **Responsivo** | Interface adaptada para desktop, tablet e mobile |
-| 🎨 **Design Moderno** | UI limpa com gradientes e animações suaves |
+| 🎨 **Design Moderno** | UI com glassmorphism, gradientes e animações |
 
 ---
 
@@ -41,6 +50,7 @@ Este projeto foi desenvolvido como parte do aprendizado em **Desenvolvimento Web
 | **Context API** | Gerenciamento de estado global |
 | **BrasilAPI** | API pública para dados de DDD |
 | **ESLint** | Padronização e qualidade de código |
+| **Vercel** | Hospedagem e deploy contínuo |
 
 ---
 
@@ -49,20 +59,24 @@ Este projeto foi desenvolvido como parte do aprendizado em **Desenvolvimento Web
 src/
 ├── components/
 │ ├── Input.tsx # Campo de busca com botão
-│ └── Output.tsx # Exibição dos resultados
+│ ├── Output.tsx # Exibição dos resultados
+│ ├── Favoritos.tsx # Sistema de favoritos
+│ └── ToggleTheme.tsx # Alternância de tema
 ├── contexts/
-│ └── DDDContext.tsx # Definição do contexto
+│ ├── DDDContext.tsx # Contexto principal
+│ └── ThemeContext.tsx # Contexto de tema
 ├── hooks/
-│ └── useDDD.ts # Hook personalizado para o contexto
+│ ├── useDDD.ts # Hook para o contexto DDD
+│ └── useTheme.ts # Hook para o contexto de tema
 ├── providers/
-│ └── DDDProvider.tsx # Provedor do contexto
+│ └── DDDProvider.tsx # Provedor do contexto DDD
 ├── services/
 │ └── dddApi.ts # Integração com a BrasilAPI
 ├── types/
 │ └── DDD.ts # Definição de tipos TypeScript
 ├── App.tsx # Componente principal
 ├── main.tsx # Ponto de entrada
-└── index.css # Estilos globais
+└── index.css # Estilos globais com variáveis de tema
 
 
 ---
@@ -85,9 +99,9 @@ npm run dev
 # 5. Acesse no navegador
 # http://localhost:5173
 
+---
 
 🛠️ Scripts Disponíveis
-
 Comando	Descrição
 npm run dev	Roda o servidor de desenvolvimento
 npm run build	Gera a build de produção
@@ -96,13 +110,25 @@ npm run lint	Executa o linter no código
 
 ---
 
-🌐 API Utilizada
+🖥️ Capturas de Tela
 
+🌞 Modo Claro:
+![alt text](image.png)
+
+🌙 Modo Escuro:
+![alt text](image-1.png)
+
+---
+
+
+🌐 API Utilizada
 Este projeto consome a BrasilAPI, um serviço público que disponibiliza dados oficiais do Brasil:
 
 GET https://brasilapi.com.br/api/ddd/v1/{ddd}
 
+
 ---
+
 
 Exemplo de resposta:
 {
@@ -116,7 +142,9 @@ Exemplo de resposta:
   ]
 }
 
+
 ---
+
 
 🧠 Aprendizados
 Durante o desenvolvimento deste projeto, foram aplicados e consolidados os seguintes conceitos:
@@ -129,28 +157,53 @@ Durante o desenvolvimento deste projeto, foram aplicados e consolidados os segui
 ✅ Gerenciamento de estado com useState
 ✅ Tratamento de erros e estados de carregamento
 ✅ Controle de versão com Git e GitHub
+✅ LocalStorage para persistência de dados
+✅ CSS Variables para temas (modo escuro/claro)
+✅ Deploy contínuo com Vercel
+
 
 ---
+
+
 
 🚧 Melhorias Futuras
 Funcionalidade	Status
-📌 Favoritar DDDs (localStorage)	🔜 Em breve
+📌 Favoritar DDDs (localStorage)	✅ Concluído
+🔍 Filtro de cidades em tempo real	✅ Concluído
+🌙 Modo escuro/claro	✅ Concluído
 🗺️ Mapa com localização das cidades	🔜 Em breve
 📊 Gráficos com estatísticas	🔜 Em breve
-🌙 Modo escuro	🔜 Em breve
-🔎 Busca por nome da cidade	🔜 Em breve
+📱 PWA (instalável)	🔜 Em breve
 
 
 ---
+
 
 📝 Licença
-
 Este projeto está sob a licença MIT — sinta-se à vontade para usá-lo, modificá-lo e compartilhá-lo.
 
+
 ---
+
+
 
 👨‍💻 Autor
 Marcello Parise
 
 GitHub: https://github.com/mparise28-dev
+
 LinkedIn: https://www.linkedin.com/in/marcello-parise-campbell-fonseca-147965194/
+
+
+
+---
+
+
+
+🙏 Agradecimentos
+FATEC — pela oportunidade e aprendizado
+
+BrasilAPI — pela API pública e gratuita
+
+Comunidade Open Source — por tornar ferramentas incríveis acessíveis a todos
+
