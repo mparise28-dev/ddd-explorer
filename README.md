@@ -1,75 +1,156 @@
-# React + TypeScript + Vite
+# 📞 DDD Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Explore todas as cidades de qualquer DDD do Brasil de forma rápida e intuitiva.**
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Sobre o Projeto
 
-## React Compiler
+O **DDD Explorer** é uma aplicação web que consome a **BrasilAPI** para listar todas as cidades pertencentes a um determinado código de Discagem Direta à Distância (DDD). Com uma interface limpa e responsiva, o usuário pode pesquisar qualquer DDD válido e visualizar a lista completa de cidades daquele estado.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Este projeto foi desenvolvido como parte do aprendizado em **Desenvolvimento Web 2** na **FATEC**, com foco em:
 
-## Expanding the ESLint configuration
+- Consumo de APIs REST
+- Gerenciamento de estado com Context API
+- Componentização no React
+- Tipagem estática com TypeScript
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🎯 Funcionalidades
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Funcionalidade | Descrição |
+|----------------|-----------|
+| 🔍 **Busca por DDD** | Digite um DDD (ex: 11) e veja todas as cidades |
+| ⚡ **Enter ou Botão** | Busque pressionando Enter ou clicando no botão |
+| ⏳ **Loading** | Indicador visual enquanto os dados são carregados |
+| 🧠 **Tratamento de Erros** | Mensagens amigáveis para DDDs inválidos ou erros de rede |
+| 📊 **Contagem** | Exibe o total de cidades encontradas |
+| 📱 **Responsivo** | Interface adaptada para desktop, tablet e mobile |
+| 🎨 **Design Moderno** | UI limpa com gradientes e animações suaves |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
+## 🧱 Stack Tecnológica
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+| Ferramenta | Finalidade |
+|------------|------------|
+| **React 19** | Biblioteca para construção da interface |
+| **TypeScript** | Tipagem estática e maior segurança no código |
+| **Vite** | Bundler rápido para desenvolvimento e build |
+| **Context API** | Gerenciamento de estado global |
+| **BrasilAPI** | API pública para dados de DDD |
+| **ESLint** | Padronização e qualidade de código |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📂 Estrutura do Projeto
 
-```
+src/
+├── components/
+│ ├── Input.tsx # Campo de busca com botão
+│ └── Output.tsx # Exibição dos resultados
+├── contexts/
+│ └── DDDContext.tsx # Definição do contexto
+├── hooks/
+│ └── useDDD.ts # Hook personalizado para o contexto
+├── providers/
+│ └── DDDProvider.tsx # Provedor do contexto
+├── services/
+│ └── dddApi.ts # Integração com a BrasilAPI
+├── types/
+│ └── DDD.ts # Definição de tipos TypeScript
+├── App.tsx # Componente principal
+├── main.tsx # Ponto de entrada
+└── index.css # Estilos globais
+
+
+---
+
+## ⚙️ Como Executar Localmente
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/mparise28-dev/ddd-explorer.git
+
+# 2. Acesse a pasta
+cd ddd-explorer
+
+# 3. Instale as dependências
+npm install
+
+# 4. Rode o projeto
+npm run dev
+
+# 5. Acesse no navegador
+# http://localhost:5173
+
+
+🛠️ Scripts Disponíveis
+
+Comando	Descrição
+npm run dev	Roda o servidor de desenvolvimento
+npm run build	Gera a build de produção
+npm run preview	Visualiza a build localmente
+npm run lint	Executa o linter no código
+
+---
+
+🌐 API Utilizada
+
+Este projeto consome a BrasilAPI, um serviço público que disponibiliza dados oficiais do Brasil:
+
+GET https://brasilapi.com.br/api/ddd/v1/{ddd}
+
+---
+
+Exemplo de resposta:
+{
+  "state": "São Paulo",
+  "cities": [
+    "São Paulo",
+    "Guarulhos",
+    "Campinas",
+    "Santos",
+    "São Bernardo do Campo"
+  ]
+}
+
+---
+
+🧠 Aprendizados
+Durante o desenvolvimento deste projeto, foram aplicados e consolidados os seguintes conceitos:
+
+✅ Consumo de API com fetch e async/await
+✅ Context API para estado global
+✅ Criação de hooks personalizados
+✅ Tipagem com TypeScript (interfaces, tipos, generics)
+✅ Componentes funcionais com React
+✅ Gerenciamento de estado com useState
+✅ Tratamento de erros e estados de carregamento
+✅ Controle de versão com Git e GitHub
+
+---
+
+🚧 Melhorias Futuras
+Funcionalidade	Status
+📌 Favoritar DDDs (localStorage)	🔜 Em breve
+🗺️ Mapa com localização das cidades	🔜 Em breve
+📊 Gráficos com estatísticas	🔜 Em breve
+🌙 Modo escuro	🔜 Em breve
+🔎 Busca por nome da cidade	🔜 Em breve
+
+
+---
+
+📝 Licença
+
+Este projeto está sob a licença MIT — sinta-se à vontade para usá-lo, modificá-lo e compartilhá-lo.
+
+---
+
+👨‍💻 Autor
+Marcelo Parise
+
+GitHub: https://github.com/mparise28-dev
+LinkedIn: https://www.linkedin.com/in/marcello-parise-campbell-fonseca-147965194/
