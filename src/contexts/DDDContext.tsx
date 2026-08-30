@@ -7,6 +7,8 @@ export type DDDContextValue = {
   loading: boolean;
   error: string | null;
   dddSelecionado: number | null;
+  historico: number[];
+  clearData: () => void; // 🆕
 };
 
 export const DDDContext = createContext<DDDContextValue | undefined>(undefined);

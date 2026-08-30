@@ -13,6 +13,11 @@ export function DDDProvider({ children }: DDDProviderProps) {
   const [error, setError] = useState<string | null>(null);
   const [dddSelecionado, setDddSelecionado] = useState<number | null>(null);
 
+  const [historico, setHistorico] = useState<number[]>(() => {
+    const saved = localStorage.getItem('dddHistorico');
+    return saved ? JSON.parse(saved) : [];
+  });
+
   async function proccessRequest(ddd: number) {
     setLoading(true);
     setError(null);
@@ -20,17 +25,23 @@ export function DDDProvider({ children }: DDDProviderProps) {
 
     try {
       const response = await getCities(ddd);
-      
-      // VERIFICA SE A RESPOSTA TEM CIDADES
+
       if (!response || !response.cities || response.cities.length === 0) {
         setError(`DDD ${ddd} não encontrado. Tente outro código.`);
         setObjeto(undefined);
         return;
       }
-      
+
       setObjeto(response);
+
+      setHistorico((prev) => {
+        const filtrado = prev.filter((item) => item !== ddd);
+        const novoHistorico = [ddd, ...filtrado];
+        const limitado = novoHistorico.slice(0, 10);
+        localStorage.setItem('dddHistorico', JSON.stringify(limitado));
+        return limitado;
+      });
     } catch (err: any) {
-      // TRATA ERROS DA API (404, 500, rede, etc)
       if (err.message?.includes('404')) {
         setError(`DDD ${ddd} não encontrado. Verifique o código e tente novamente.`);
       } else if (err.message?.includes('NetworkError')) {
@@ -44,14 +55,25 @@ export function DDDProvider({ children }: DDDProviderProps) {
     }
   }
 
+  // 🆕 FUNÇÃO PARA LIMPAR OS DADOS
+  function clearData() {
+    setObjeto(undefined);
+    setError(null);
+    setDddSelecionado(null);
+  }
+
   return (
-    <DDDContext.Provider value={{ 
-      objeto, 
-      proccessRequest, 
-      loading, 
-      error,
-      dddSelecionado 
-    }}>
+    <DDDContext.Provider
+      value={{
+        objeto,
+        proccessRequest,
+        loading,
+        error,
+        dddSelecionado,
+        historico,
+        clearData, // 🆕
+      }}
+    >
       {children}
     </DDDContext.Provider>
   );

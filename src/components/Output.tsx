@@ -1,7 +1,8 @@
 import useDDD from "../hooks/useDDD";
 
 export default function Output() {
-  const { objeto, loading, error, dddSelecionado } = useDDD();
+  const { objeto, loading, error, dddSelecionado, historico, proccessRequest } =
+    useDDD();
 
   // LOADING
   if (loading) {
@@ -15,26 +16,20 @@ export default function Output() {
     );
   }
 
-  // ERRO (mostra mensagem amigável)
+  // ERRO
   if (error) {
     return (
       <div id="saida">
         <div className="error-state">
           <span className="error-icon">❌</span>
           <p>{error}</p>
-          <p style={{ 
-            fontSize: "0.9rem", 
-            color: "rgba(255,255,255,0.4)",
-            marginTop: "8px"
-          }}>
-            Dicas: 11, 21, 31, 41, 51, 61, 71, 81
-          </p>
+          <p className="error-hint">Dicas: 11, 21, 31, 41, 51, 61, 71, 81</p>
         </div>
       </div>
     );
   }
 
-  // VAZIO
+  // VAZIO (mostra histórico se tiver)
   if (!objeto) {
     return (
       <div id="saida">
@@ -42,6 +37,24 @@ export default function Output() {
           <span className="empty-icon">📞</span>
           <h3>Digite um DDD para começar</h3>
           <p>Exemplos: 11, 21, 31, 41, 51</p>
+
+          {/* 🆕 MOSTRA HISTÓRICO SE TIVER */}
+          {historico.length > 0 && (
+            <div className="historico-container">
+              <p className="historico-titulo">⏱️ Últimas buscas:</p>
+              <div className="historico-lista">
+                {historico.map((ddd) => (
+                  <button
+                    key={ddd}
+                    className="historico-item"
+                    onClick={() => proccessRequest(ddd)}
+                  >
+                    📞 {ddd}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );

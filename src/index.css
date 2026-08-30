@@ -371,3 +371,52 @@ body {
     padding: 8px 12px;
   }
 }
+
+/* ===== HISTÓRICO ===== */
+.historico-container {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.historico-titulo {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 10px;
+}
+
+.historico-lista {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.historico-item {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.historico-item:hover {
+  background: rgba(245, 87, 108, 0.2);
+  color: #fff;
+  border-color: rgba(245, 87, 108, 0.3);
+  transform: translateY(-2px);
+}
+
+.historico-item:active {
+  transform: scale(0.95);
+}
+
+.error-hint {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 8px;
+}

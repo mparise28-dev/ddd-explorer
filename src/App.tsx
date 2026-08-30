@@ -9,7 +9,7 @@ function App() {
       <div className="app-container">
         <h1 className="app-title">📞 DDD Explorer</h1>
         <p className="app-subtitle">Descubra todas as cidades de um DDD</p>
-        <Input />
+        <Input />        {/* ← APENAS UMA VEZ! */}
         <Output />
       </div>
     </DDDProvider>

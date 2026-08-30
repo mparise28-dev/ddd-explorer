@@ -3,27 +3,35 @@ import useDDD from "../hooks/useDDD";
 
 export default function Input() {
   const [ddd, setDdd] = useState<string>("");
-  const { proccessRequest, loading } = useDDD();
+  const { proccessRequest, loading, clearData } = useDDD();
 
   function handleSearch() {
     const dddNumber = Number(ddd);
     
-    // VALIDAÇÃO ANTES DE CHAMAR A API
-    if (!ddd) {
-      return; // campo vazio
-    }
+    // Se estiver vazio, não faz nada
+    if (!ddd) return;
     
+    // Validação: 11 a 99
     if (dddNumber < 11 || dddNumber > 99) {
       alert("DDD inválido! Digite um número entre 11 e 99.");
+      setDdd("");        // ← LIMPA O INPUT
+      clearData();       // ← LIMPA O OUTPUT (mostra histórico)
       return;
     }
     
+    // Só chega aqui se o DDD for válido
     proccessRequest(dddNumber);
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       handleSearch();
+    }
+    
+    if (e.key === "Escape") {
+      setDdd("");
+      clearData();
+      (e.target as HTMLInputElement).blur();
     }
   }
 
@@ -37,7 +45,7 @@ export default function Input() {
         max={99}
         onKeyDown={handleKeyDown}
         onChange={(e) => setDdd(e.target.value)}
-        placeholder="Digite o DDD"
+        placeholder="Digite o DDD (ESC limpa)"
         disabled={loading}
       />
       <button
