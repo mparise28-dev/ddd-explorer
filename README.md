@@ -150,7 +150,7 @@ Este projeto está sob a licença MIT — sinta-se à vontade para usá-lo, modi
 ---
 
 👨‍💻 Autor
-Marcelo Parise
+Marcello Parise
 
 GitHub: https://github.com/mparise28-dev
 LinkedIn: https://www.linkedin.com/in/marcello-parise-campbell-fonseca-147965194/

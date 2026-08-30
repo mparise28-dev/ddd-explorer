@@ -1,14 +1,19 @@
-import Input from "./components/Input";
-import Output from "./components/Output";
-import { DDDProvider } from "./providers/DDDProvider";
+import Input from './components/Input';
+import Output from './components/Output';
+import { DDDProvider } from './providers/DDDProvider';
+import './index.css';
 
-export default function App() {
+function App() {
   return (
-    <div id="container">
-      <DDDProvider>
+    <DDDProvider>
+      <div className="app-container">
+        <h1 className="app-title">📞 DDD Explorer</h1>
+        <p className="app-subtitle">Descubra todas as cidades de um DDD</p>
         <Input />
         <Output />
-      </DDDProvider>
-    </div>
+      </div>
+    </DDDProvider>
   );
 }
+
+export default App;
