@@ -1,8 +1,9 @@
 import useDDD from "../hooks/useDDD";
+import Favoritos from "./Favoritos";
 
 export default function Output() {
-  const { objeto, loading, error, dddSelecionado, historico, proccessRequest } =
-    useDDD();
+  // 🆕 Pega o proccessRequest aqui no topo
+  const { objeto, loading, error, dddSelecionado, historico, proccessRequest } = useDDD();
 
   // LOADING
   if (loading) {
@@ -29,7 +30,7 @@ export default function Output() {
     );
   }
 
-  // VAZIO (mostra histórico se tiver)
+  // VAZIO
   if (!objeto) {
     return (
       <div id="saida">
@@ -38,7 +39,6 @@ export default function Output() {
           <h3>Digite um DDD para começar</h3>
           <p>Exemplos: 11, 21, 31, 41, 51</p>
 
-          {/* 🆕 MOSTRA HISTÓRICO SE TIVER */}
           {historico.length > 0 && (
             <div className="historico-container">
               <p className="historico-titulo">⏱️ Últimas buscas:</p>
@@ -47,7 +47,7 @@ export default function Output() {
                   <button
                     key={ddd}
                     className="historico-item"
-                    onClick={() => proccessRequest(ddd)}
+                    onClick={() => proccessRequest(ddd)} // ✅ Agora funciona!
                   >
                     📞 {ddd}
                   </button>
@@ -64,7 +64,10 @@ export default function Output() {
   return (
     <div id="saida">
       <div className="output-header">
-        <h2 id="titulo">📍 {objeto.state}</h2>
+        <div className="output-header-left">
+          <h2 id="titulo">📍 {objeto.state}</h2>
+          <Favoritos />
+        </div>
         <span className="badge-contagem">
           {objeto.cities.length} cidades
         </span>

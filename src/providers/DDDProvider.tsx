@@ -13,8 +13,15 @@ export function DDDProvider({ children }: DDDProviderProps) {
   const [error, setError] = useState<string | null>(null);
   const [dddSelecionado, setDddSelecionado] = useState<number | null>(null);
 
+  // Histórico
   const [historico, setHistorico] = useState<number[]>(() => {
     const saved = localStorage.getItem('dddHistorico');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // 🆕 FAVORITOS
+  const [favoritos, setFavoritos] = useState<number[]>(() => {
+    const saved = localStorage.getItem('dddFavoritos');
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -32,8 +39,12 @@ export function DDDProvider({ children }: DDDProviderProps) {
         return;
       }
 
-      setObjeto(response);
+      // 🆕 Adiciona o DDD no objeto
+      const responseComDDD: DDDCities = { ...response, ddd };
 
+      setObjeto(responseComDDD);
+
+      // Adiciona ao histórico
       setHistorico((prev) => {
         const filtrado = prev.filter((item) => item !== ddd);
         const novoHistorico = [ddd, ...filtrado];
@@ -41,6 +52,7 @@ export function DDDProvider({ children }: DDDProviderProps) {
         localStorage.setItem('dddHistorico', JSON.stringify(limitado));
         return limitado;
       });
+
     } catch (err: any) {
       if (err.message?.includes('404')) {
         setError(`DDD ${ddd} não encontrado. Verifique o código e tente novamente.`);
@@ -55,7 +67,19 @@ export function DDDProvider({ children }: DDDProviderProps) {
     }
   }
 
-  // 🆕 FUNÇÃO PARA LIMPAR OS DADOS
+  // 🆕 FUNÇÃO PARA FAVORITAR/REMOVER FAVORITO
+  function toggleFavorito(ddd: number) {
+    setFavoritos((prev) => {
+      const isFavorito = prev.includes(ddd);
+      const novosFavoritos = isFavorito
+        ? prev.filter((item) => item !== ddd)
+        : [...prev, ddd];
+
+      localStorage.setItem('dddFavoritos', JSON.stringify(novosFavoritos));
+      return novosFavoritos;
+    });
+  }
+
   function clearData() {
     setObjeto(undefined);
     setError(null);
@@ -71,7 +95,9 @@ export function DDDProvider({ children }: DDDProviderProps) {
         error,
         dddSelecionado,
         historico,
-        clearData, // 🆕
+        favoritos, // 🆕
+        toggleFavorito, // 🆕
+        clearData,
       }}
     >
       {children}

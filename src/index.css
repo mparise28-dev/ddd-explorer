@@ -420,3 +420,46 @@ body {
   color: rgba(255, 255, 255, 0.4);
   margin-top: 8px;
 }
+
+/* ===== FAVORITOS ===== */
+.favoritos-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.favorito-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  padding: 0;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.favorito-btn:hover {
+  transform: scale(1.3);
+}
+
+.favorito-btn.favorito-ativo {
+  color: #fbbf24;
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+}
+
+.favorito-label {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.favorito-btn.favorito-ativo + .favorito-label {
+  color: rgba(251, 191, 36, 0.6);
+}
+
+.output-header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
